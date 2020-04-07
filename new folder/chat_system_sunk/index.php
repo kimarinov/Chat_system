@@ -13,18 +13,11 @@ session_start();
 		<div style="height: 10px;"></div>		
 		Password: <input type="password" name="password" class="form-control" required> 
 		<div style="height: 10px;"></div>
-		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> Login</button> No account? <a href="signup.php"> Sign up</a>
+		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> Login</button> No account? <a href="sign_up.php"> Sign up</a>
 		</form>
-
-			<center>
-			<?php
-				
-				if(isset($_SESSION['msg'])){
-					echo $_SESSION['msg'];
-					unset($_SESSION['msg']);
-				}
-			?>
-			</center>
-		</div>
 	</div>
 </div>
+
+<?php 
+
+ ?>
