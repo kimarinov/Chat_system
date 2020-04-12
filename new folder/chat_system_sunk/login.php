@@ -46,6 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             else{
                $_SESSION['id']=$row['user_type'];
+               $_SESSION['user_name'] = $username;            
+                ?>
                 ?>
                 <script>
                     window.alert('Login Success, Welcome User!');
