@@ -1,34 +1,36 @@
 <?php
 	include 'includes/header.php';
 	session_start();
-	
-	var_dump($user_name);
 	function check_input($data) {
 		$data = trim($data);
 		$data = stripslashes($data);
 		$data = htmlspecialchars($data);
 		return $data;
 	}
-	var_dump($_POST);
+	
+
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		$user_name=check_input($_POST['username']);
+		$user_name=check_input($_POST['user_name']);
 		
-		if (!preg_match("/^[a-zA-Z0-9_]*$/",$username)) {
+		if (!preg_match("/^[a-zA-Z0-9_]*$/",$user_name)) {
 			$_SESSION['sign_msg'] = "Username should not contain space and special characters!"; 
-			header('location: signup.php');
+			header('location: sign_up.php');
 		}
 		else{
 			
-		$fusername=$username;
+		$username=$user_name;
 		
-		$password = check_input($_POST["password"]);
-		$fpassword=md5($password);
-		$fname = check_input($_POST["name"]);
+		$password = check_input($_POST['password']);
+		$md5_password=md5($password);
+		$name = check_input($_POST['name']);
 		
-		mysqli_query($conn,"insert into `user` (uname, username, password, access) values ('$fname', '$fusername', '$fpassword', '2')");
+		$insurt_query = "insert into `user` (first_name, user_name, password, user_type) values ('$name', '$username', '$md5_password',2)";
+		mysqli_query($conn, $insurt_query);
+		
 		
 		$_SESSION['msg'] = "Sign up successful. You may login now!"; 
 		header('location: index.php');
 		}
 	}
+
 ?>

@@ -1,6 +1,5 @@
 <?php 
 include 'includes/header.php';
-session_start();
 
 ?>
 
@@ -15,9 +14,15 @@ session_start();
 		<div style="height: 10px;"></div>
 		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> Login</button> No account? <a href="sign_up.php"> Sign up</a>
 		</form>
+			<center>
+			<?php
+				session_start();
+				if(isset($_SESSION['msg'])){
+					echo $_SESSION['msg'];
+					unset($_SESSION['msg']);
+				}
+			?>
+			</center>
 	</div>
 </div>
 
-<?php 
-
- ?>

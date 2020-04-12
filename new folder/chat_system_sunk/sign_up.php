@@ -1,8 +1,9 @@
+
 <?php 
 include 'includes/header.php';
 ?>
 
-<div class="container">
+
 <div class="container">
 	<div id="signup_form" class="well">
 		<h2><center><span class="glyphicon glyphicon-user"></span> Sign Up</center></h2>
@@ -21,8 +22,7 @@ include 'includes/header.php';
 			<center>
 			<?php
 				session_start();
-				$user_name = $_POST['user_name'];
-				var_dump($user_name);
+
 				if(isset($_SESSION['sign_msg'])){
 					echo $_SESSION['sign_msg'];
 					unset($_SESSION['sign_msg']);
