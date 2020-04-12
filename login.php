@@ -1,48 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-    *{margin:0px; padding:0 px;}
-    #main{width:200px; margin:20px auto;}
-    </style>
-</head>
-<body>
-<div id ="main">
-<?php
+<?php 
+include 'includes/header.php';
 session_start();
-require_once("connection.php");
 
-if(Isset($_POST['login'])){
-    $user_name = $_POST['user_name'];
-    $password = $_POST['password'];
-
-    $q = 'SELECT * FROM `user` where `user_name` = "'.$user_name.'" and `password`="'.$password.'"';
-    $r = mysqli_query($con , $q);
-
-    if(mysqli_num_rows($r) > 0){
-        $_SESSION['user_name'] = $user_name;
-
-        header("location:index.php");
-    }else{
-        echo 'your password and user name do not match';
-    }
-
+function check_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
 
-?>
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $user_name=check_input($_POST['user_name']);
+    
+    if (!preg_match("/^[a-zA-Z0-9_]*$/",$user_name)) {
+        $_SESSION['sign_msg'] = "Username should not contain space and special characters!"; 
+        header('location: sign_up.php');
+    }
+    else{
+        
+    $username=$user_name;
+    
+    $password = check_input($_POST['password']);
+    $md5_password=md5($password);
+    
+    $check_query="select * from `user` where user_name='$username' and password='$md5_password'";
+   
+    $check_conn = mysqli_query($conn, $check_query);
 
-<h2 style = "text-align:center">Login</h2>
-<form method="post">
-User Name:<br>
-<input type="text" name="user_name" placeholder="user name" ><br><br>
-Password:<br>
-<input type="password" name="password" placeholder = "password"><br><br>
-<input type="submit" name = "login" value = "Login">
-<a href="registration.php"> Create an account </a>
-</form>
-</div>
-</body>
-</html>
+   if(mysqli_num_rows($check_conn) == 0){
+            $_SESSION['msg'] = "Login Failed, Invalid Input!";
+           header('location: index.php');
+  
+        }
+        else{
+            $row=mysqli_fetch_array($check_conn);
+            if ($row['user_type'] == 1){
+                $_SESSION['id']=$row['user_type'];
+              
+                ?>
+                <script>
+                    window.alert('Login Success, Welcome Admin!');
+                    window.location.href='admin/';
+                </script>
+                <?php
+            }
+            else{
+               $_SESSION['id']=$row['user_type'];
+                ?>
+                <script>
+                    window.alert('Login Success, Welcome User!');
+                    window.location.href='chat_room.php';
+                </script>
+                <?php
+            }
+        }
+        
+        }
+    }
+?>
