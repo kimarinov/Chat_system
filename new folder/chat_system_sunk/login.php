@@ -2,59 +2,22 @@
 include 'includes/header.php';
 session_start();
 
-function check_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
+if (isset($_POST['user_name'])) {
+	$user_name = $_POST['user_name'];
+    $password = $_POST['password'];
+
+    $password_check_query = "SELECT * FROM `user` WHERE `user_name` = '$user_name' AND `password`='$password'";
+    $check_query_result = mysqli_query($conn, $password_check_query);
+
+    if(mysqli_num_rows($check_query_result) > 0){
+        $_SESSION['user_name'] = $user_name;
+        echo "Succsesful log in";
+        header("location:chat_room.php");
+    }else{
+    	 header("location:index.php");
+    	 echo "string";
+    }
+
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $user_name=check_input($_POST['user_name']);
-    
-    if (!preg_match("/^[a-zA-Z0-9_]*$/",$user_name)) {
-        $_SESSION['sign_msg'] = "Username should not contain space and special characters!"; 
-        header('location: sign_up.php');
-    }
-    else{
-        
-    $username=$user_name;
-    
-    $password = check_input($_POST['password']);
-    $md5_password=md5($password);
-    
-    $check_query="select * from `user` where user_name='$username' and password='$md5_password'";
-   
-    $check_conn = mysqli_query($conn, $check_query);
-
-   if(mysqli_num_rows($check_conn) == 0){
-            $_SESSION['msg'] = "Login Failed, Invalid Input!";
-           header('location: index.php');
-  
-        }
-        else{
-            $row=mysqli_fetch_array($check_conn);
-            if ($row['user_type'] == 1){
-                $_SESSION['id']=$row['user_type'];
-              
-                ?>
-                <script>
-                    window.alert('Login Success, Welcome Admin!');
-                    window.location.href='admin/';
-                </script>
-                <?php
-            }
-            else{
-               $_SESSION['id']=$row['user_type'];
-                ?>
-                <script>
-                    window.alert('Login Success, Welcome User!');
-                    window.location.href='chat_room.php';
-                </script>
-                <?php
-            }
-        }
-        
-        }
-    }
-?>
+ 
