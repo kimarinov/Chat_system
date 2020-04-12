@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 	include 'includes/header.php';
 	session_start();
@@ -34,3 +35,7 @@
 	}
 
 ?>
+=======
+<?php 
+include 'includes/header.php';
+>>>>>>> parent of fe80a4f... sun
