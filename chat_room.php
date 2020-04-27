@@ -1,50 +1,57 @@
 <?php 
 include 'includes/header.php';
+include 'includes/navbar.php';
 session_start();
 
 if(isset($_SESSION['user_name'])){
-
+    $user_name = $_SESSION['user_name'];
     echo 'Welcome '.$_SESSION['user_name'];
     echo '<a href="logout.php"> Log out</a><br>';
 }
 
+
 ?>
-<div id="main">
-    <div id="message_area">
 
-<?php
-  
+<div class="col-lg-8">
+   
+    <div>
+        <div class="panel panel-default" style="height: 400px;">
+           
+            <div style="height:10px;"></div>
+            <div id="chat_area" style="margin-left:10px; max-height:400px; overflow-y:scroll;   display: flex;
+  flex-direction: column-reverse;">
+                <?php 
 
-    $q1 = "SELECT * FROM `message`";
-    $r1 = mysqli_query($conn,$q1);
-    while($row = mysqli_fetch_assoc($r1)){
-        $message = $row['message'];
-        $user_name = $row['user_name'];
-        echo '<h4 style="color:red">'.$user_name.'</h4>';
-        echo '<p>'.$message.'</p>';
-        echo '<hr>';
-    }
+                $read_query = "SELECT * FROM `message` ORDER BY `message`.`id` DESC";
+                $read_result = mysqli_query($conn,$read_query);
+                while($row = mysqli_fetch_assoc($read_result)){
+                    $message = $row['message'];
+                    $user_name = $row['user_name'];
+                    echo '<p style="color:red">'.$user_name.'</p>';
+                    echo '<p>'.$message.'</p>';
+                    echo '<hr>';
+                }
+             ?>
+            </div>
+        </div>
+       <form method="post" action="">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Type message..." name="message" >
+                <span class="input-group-btn">
+                <button class="btn btn-success" type="submit" id="send_msg"  name = "">
+                <span class="glyphicon glyphicon-comment"></span> Send
+                </button>
+                </span>
+            </div>
+      </form>
+        
+    </div>          
+</div>
 
-    if(isset($_POST['message'])){
+<?php 
+if(isset($_POST['message'])){
     $message = $_POST['message'];
-
-    $q = 'INSERT INTO `message` (`id`, `message`, `user_name`)
-    VALUES("","'.$message.'","'.$_SESSION['user_name'].'")';
-
-    if(mysqli_query($conn, $q)){
-        echo '<h4 style ="color:red">'.$_SESSION['user_name'].'</h4>';
-        echo '<p>'.$message.'</p>';
-    }
+    $insert_messge = "INSERT INTO `message` (`message`, `user_name`) VALUES ('$message', '$user_name')";
+    $insurt_rezult = mysqli_query($conn, $insert_messge);
+    header('Location: chat_room.php');
 }
-
-?>
-    </div>
-
-</div>
-<div id="message_area main">
-	
-	 <form method="post">
-    <input type="text" name = "message" style="width:370px; height:50px;" placeholder = "Type your message">
-    <input type="submit" name = "submit" style="width:120px; height:50px;" value = "message">
-    </form>
-</div>
