@@ -4,7 +4,7 @@ include 'includes/navbar.php';
 session_start();
 
 if(isset($_SESSION['user_name'])){
-    $user_name = $_SESSION['user_name'];
+    $curent_user_name = $_SESSION['user_name'];
     echo 'Welcome '.$_SESSION['user_name'];
     echo '<a href="logout.php"> Log out</a><br>';
 }
@@ -27,9 +27,10 @@ if(isset($_SESSION['user_name'])){
                 while($row = mysqli_fetch_assoc($read_result)){
                     $message = $row['message'];
                     $user_name = $row['user_name'];
-                    echo '<p style="color:red">'.$user_name.'</p>';
-                    echo '<p>'.$message.'</p>';
-                    echo '<hr>';
+                   
+                  
+                    echo '<p style="color:red">'.$user_name. ' ' .$message.'</p>';
+                    
                 }
              ?>
             </div>
@@ -51,7 +52,8 @@ if(isset($_SESSION['user_name'])){
 <?php 
 if(isset($_POST['message'])){
     $message = $_POST['message'];
-    $insert_messge = "INSERT INTO `message` (`message`, `user_name`) VALUES ('$message', '$user_name')";
+    $insert_messge = "INSERT INTO `message` (`message`, `user_name`) VALUES ('$message', '$curent_user_name')";
     $insurt_rezult = mysqli_query($conn, $insert_messge);
-    header('Location: chat_room.php');
+    header("Refresh:0");
 }
+?>
