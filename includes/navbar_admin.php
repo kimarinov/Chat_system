@@ -6,6 +6,7 @@
 		
 		<ul class="nav navbar-nav">
 			<li><a href="chat_room.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+			<li><a href="users.php"><span class="glyphicon glyphicon-user"></span> Users</a></li>
 		</ul>
 		
 		<ul class="nav navbar-nav navbar-right">

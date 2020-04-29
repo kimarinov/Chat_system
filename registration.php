@@ -24,7 +24,7 @@
 		$md5_password=md5($password);
 		$name = check_input($_POST['name']);
 		
-		$insurt_query = "insert into `user` (first_name, user_name, password, user_type) values ('$name', '$username', '$md5_password',2)";
+		$insurt_query = "insert into `users` (user_first_name, user_name, password, user_type) values ('$name', '$username', '$md5_password',2)";
 		mysqli_query($conn, $insurt_query);
 		
 		

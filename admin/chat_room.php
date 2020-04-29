@@ -1,7 +1,7 @@
 <?php 
-include 'includes/header.php';
-include 'includes/navbar.php';
-include 'includes/replace_function.php';
+include '../includes/header.php';
+include '../includes/navbar_admin.php';
+include '../includes/replace_function.php';
 session_start();
 if(isset($_SESSION['user_name'])){
     $curent_user_name = $_SESSION['user_name'];
