@@ -1,6 +1,7 @@
 <?php 
 include 'includes/header.php';
 include 'includes/navbar.php';
+include 'includes/replace_function.php';
 session_start();
 
 if(isset($_SESSION['user_name'])){
@@ -52,6 +53,7 @@ if(isset($_SESSION['user_name'])){
 <?php 
 if(isset($_POST['message'])){
     $message = $_POST['message'];
+    $message =replace_to_emoji($message);
     $insert_messge = "INSERT INTO `message` (`message`, `user_name`) VALUES ('$message', '$curent_user_name')";
     $insurt_rezult = mysqli_query($conn, $insert_messge);
     header("Refresh:0");
