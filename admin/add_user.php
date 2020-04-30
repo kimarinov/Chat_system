@@ -17,11 +17,22 @@ include '../includes/navbar_admin.php';
 		<div style="height: 10px;"></div>
 		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span>Create</button> 
 		<a class="btn btn-primary" href="users.php" role="button"><span class="glyphicon glyphicon-remove"></span>Cancel</a> 
-		
 		</form>	
+		<center>
+			<?php
+				session_start();
+
+				if(isset($_SESSION['sign_msg'])){
+					echo $_SESSION['sign_msg'];
+					unset($_SESSION['sign_msg']);
+				}
+			?>
+			</center>
 		<div style="height: 15px;"></div>
 		<div style="color: red; font-size: 15px;">
 
 		</div>
 	</div>
 </div>
+
+

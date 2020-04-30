@@ -10,6 +10,7 @@ if(isset($_SESSION['user_name'])){
 }
  $user_id = $_SESSION['user_id'];
 
+
 ?>
 
 <div class="col-lg-8">
@@ -21,23 +22,31 @@ if(isset($_SESSION['user_name'])){
             <div id="chat_area" style="margin-left:10px; max-height:400px; overflow-y:scroll;   display: flex;
   flex-direction: column-reverse;">
                 <?php 
-                $read_query = "SELECT m.message, u.user_name, u.user_id, m.id  FROM message  m JOIN users u ON m.user_id = u.user_id WHERE `date_deleted` IS NULL ORDER BY m.id DESC";
+                $read_query = "SELECT m.message, u.user_name, u.user_id, m.id, m.date_deleted  FROM message  m JOIN users u ON m.user_id = u.user_id  ORDER BY m.id DESC";
                 $read_result = mysqli_query($conn,$read_query);
                 while($row = mysqli_fetch_assoc($read_result)){
                     $message = $row['message'];
                     $user_name = $row['user_name'];
+                    $date_deleted = $row['date_deleted'];
                   ?>
                    <div class="input-group">
                         <?php  
                         if ($user_id == $row['user_id']) { 
-                            echo "You say: ";
-                            echo " $message";
-                            ?>  <a href="delete_msg.php?id=<?= $row['id'] ?>" type="submit" class="btn btn-primary btn-sm">Dellete</a><?php 
+                            echo "<span style='color:red'>you say: </span>";
+                            echo "<span style='color:red'> $message</span>";
+                            ?>  <a href="delete_msg.php?id=<?= $row['id'] ?>" type="submit" title = "Delete"  class="glyphicon glyphicon-trash"></a><?php 
                         }
-                        else{
-                            echo "$user_name say:";
+                        elseif($row['date_deleted'] != NUll){
+                            echo "$user_name  say: ";
                             echo " $message";
+                            ?>  <a href="restore.php?id=<?= $row['id'] ?>" type="submit" title = "Restore"  class="glyphicon glyphicon-refresh"></a>
+                            <a href="delete_msg.php?id=<?= $row['id'] ?>" type="submit" title = "Delete"  class="glyphicon glyphicon-trash"></a><?php 
+                        }else{
+                            echo "$user_name  say:";
+                            echo " $message";
+                             ?>  <a href="delete_msg.php?id=<?= $row['id'] ?>" type="submit" title = "Delete"  class="glyphicon glyphicon-trash"></a><?php 
                         }
+                      
                       ?>
                   </div>
                   <?php 
@@ -67,6 +76,5 @@ if(isset($_POST['message'])){
     $insurt_rezult = mysqli_query($conn, $insert_messge);
     header("Refresh:0");
 }
-
 
 ?>

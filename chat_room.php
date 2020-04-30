@@ -30,9 +30,9 @@ if(isset($_SESSION['user_name'])){
                    <div class="input-group">
                         <?php  
                         if ($user_id == $row['user_id']) { 
-                            echo "You say: ";
-                            echo " $message";
-                            ?>  <a href="delete_msg.php?id=<?= $row['id'] ?>" type="submit" class="btn btn-primary btn-sm">Dellete</a><?php 
+                            echo "<span style='color:red'>you say: </span>";
+                            echo "<span style='color:red'> $message</span>";
+                            ?>  <a href="delete_msg.php?id=<?= $row['id'] ?>" type="submit" title = "Delete"  class="glyphicon glyphicon-trash"></a><?php 
                         }
                         else{
                             echo "$user_name say:";

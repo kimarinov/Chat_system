@@ -40,8 +40,10 @@ include '../includes/navbar_admin.php';
 					?>
 				</td>
 				<td> 
-					<button type="button" class="btn btn-warning edituser" value="<?php echo $row['userid']; ?>"><span class="glyphicon glyphicon-pencil"></span> Edit</button> || 
-					<button type="button" class="btn btn-danger deleteuser" value="<?php echo $row['userid']; ?>"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+					<a href="update_user.php?id=<?= $row['user_id'] ?>" role="button"  class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Edit</a> || 
+
+					<a href="delete_msg.php?id=<?= $row['id'] ?>" role="button"  class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+
 				</td>
 			</tr>
 			<?php
@@ -52,4 +54,3 @@ include '../includes/navbar_admin.php';
 </div>
 
 
-a
