@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = check_input($_POST['password']);
     $md5_password=md5($password);
     
-    $check_query="select * from `user` where user_name='$username' and password='$md5_password'";
+    $check_query="select * from `users` where user_name='$username' and password='$md5_password'";
    
     $check_conn = mysqli_query($conn, $check_query);
 
@@ -35,19 +35,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         else{
             $row=mysqli_fetch_array($check_conn);
             if ($row['user_type'] == 1){
-                $_SESSION['id']=$row['user_type'];
+                $_SESSION['user_type']=$row['user_type'];
+                $_SESSION['user_id'] = $row['user_id'];
               
                 ?>
                 <script>
                     window.alert('Login Success, Welcome Admin!');
-                    window.location.href='admin/';
+                    window.location.href='admin/chat_room.php';
                 </script>
                 <?php
             }
             else{
-               $_SESSION['id']=$row['user_type'];
-               $_SESSION['user_name'] = $username;            
-                ?>
+               $_SESSION['user_name'] = $username;   
+                $_SESSION['user_id'] = $row['user_id'];
+                $_SESSION['user_type']=$row['user_type'];         
                 ?>
                 <script>
                     window.alert('Login Success, Welcome User!');
