@@ -22,10 +22,10 @@ if(isset($_SESSION['user_name'])){
             <div id="chat_area" style="margin-left:10px; max-height:400px; overflow-y:scroll;   display: flex;
   flex-direction: column-reverse;">
                 <?php 
-                $read_query = "SELECT m.message, u.user_name, u.user_id, m.id, m.date_deleted  FROM message  m JOIN users u ON m.user_id = u.user_id  ORDER BY m.id DESC";
+                $read_query = "SELECT m.msg_content, u.user_name, u.user_id, m.msg_id, m.date_deleted  FROM messages  m JOIN users u ON m.user_id = u.user_id  ORDER BY m.msg_id DESC";
                 $read_result = mysqli_query($conn,$read_query);
                 while($row = mysqli_fetch_assoc($read_result)){
-                    $message = $row['message'];
+                    $message = $row['msg_content'];
                     $user_name = $row['user_name'];
                     $date_deleted = $row['date_deleted'];
                   ?>
@@ -34,17 +34,17 @@ if(isset($_SESSION['user_name'])){
                         if ($user_id == $row['user_id']) { 
                             echo "<span style='color:red'>you say: </span>";
                             echo "<span style='color:red'> $message</span>";
-                            ?>  <a href="delete_msg.php?id=<?= $row['id'] ?>" type="submit" title = "Delete"  class="glyphicon glyphicon-trash"></a><?php 
+                            ?>  <a href="delete_msg.php?id=<?= $row['msg_id'] ?>" type="submit" title = "Delete"  class="glyphicon glyphicon-trash"></a><?php 
                         }
                         elseif($row['date_deleted'] != NUll){
                             echo "$user_name  say: ";
                             echo " $message";
-                            ?>  <a href="restore.php?id=<?= $row['id'] ?>" type="submit" title = "Restore"  class="glyphicon glyphicon-refresh"></a>
-                            <a href="delete_msg.php?id=<?= $row['id'] ?>" type="submit" title = "Delete"  class="glyphicon glyphicon-trash"></a><?php 
+                            ?>  <a href="restore.php?id=<?= $row['msg_id'] ?>" type="submit" title = "Restore"  class="glyphicon glyphicon-refresh"></a>
+                            <a href="delete_msg.php?id=<?= $row['msg_id'] ?>" type="submit" title = "Delete"  class="glyphicon glyphicon-trash"></a><?php 
                         }else{
                             echo "$user_name  say:";
                             echo " $message";
-                             ?>  <a href="delete_msg.php?id=<?= $row['id'] ?>" type="submit" title = "Delete"  class="glyphicon glyphicon-trash"></a><?php 
+                             ?>  <a href="delete_msg.php?id=<?= $row['msg_id'] ?>" type="submit" title = "Delete"  class="glyphicon glyphicon-trash"></a><?php 
                         }
                       
                       ?>
@@ -72,7 +72,7 @@ if(isset($_SESSION['user_name'])){
 if(isset($_POST['message'])){
     $message = $_POST['message'];
     $message =replace_to_emoji($message);
-    $insert_messge = "INSERT INTO `message` (`message`, `user_id`) VALUES ('$message', '$user_id')";
+    $insert_messge = "INSERT INTO `messages` (`msg_content`, `user_id`) VALUES ('$message', '$user_id')";
     $insurt_rezult = mysqli_query($conn, $insert_messge);
     header("Refresh:0");
 }

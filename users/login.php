@@ -1,5 +1,5 @@
 <?php 
-include 'includes/header.php';
+include '../includes/header.php';
 session_start();
 
 function check_input($data) {
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    if(mysqli_num_rows($check_conn) == 0){
             $_SESSION['msg'] = "Login Failed, Invalid Input!";
-           header('location: index.php');
+           header('location: ../index.php');
   
         }
         else{
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ?>
                 <script>
                     window.alert('Login Success, Welcome Admin!');
-                    window.location.href='admin/chat_room.php';
+                    window.location.href='../admin/chat_room.php';
                 </script>
                 <?php
             }

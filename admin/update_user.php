@@ -5,14 +5,17 @@ include '../includes/navbar_admin.php';
 
 $id = $_GET['id'];
 
-$select_query = "SELECT u.user_first_name,u.user_name,u.password FROM `users` u JOIN user_types t ON u.user_type=t.user_id WHERE u.user_id=".$id;
+$select_query = "SELECT u.user_first_name,u.user_name,u.password,t.user_type FROM `users` u JOIN user_types t ON u.user_type=t.user_id WHERE u.user_id=".$id;
 $select_rezult = mysqli_query($conn, $select_query);
 
 if( $select_rezult ){
 	$row = mysqli_fetch_assoc($select_rezult);
 }
 
+$read_user_types = "SELECT * FROM `user_types`";
+$user_types_result = mysqli_query($conn, $read_user_types);
 ?>
+
 
 <div class="col-lg-12">
     <div class="panel panel-default" style="height:50px;">
@@ -36,19 +39,21 @@ if( $select_rezult ){
 				<td><input type="text" name="name" value="<?= $row['user_first_name'] ?>"></td>
 				<td><input type="text" name="user_name" value="<?= $row['user_name'] ?>"></td>
 				<td><input type="text" name="password" value="<?= $row['password'] ?>"></td>
-				<select name="cuisine_id" class="form-control">
-					<option> -- select cuisine -- </option>
-					<?php if( mysqli_num_rows($result) > 0 ){
-						while($row = mysqli_fetch_assoc($result)){
-					?>
-					<option value="<?= $row['cuisine_id'] ?>" <?php if( $row['cuisine_id'] == $meal_type_row['cuisine_id']) { echo "selected=true"; } ?>><?= $row['cuisine_name'] ?></option>
-
-					<?php 
-						}
-					}
-
-					?>
-				</select>
+				<td>
+					<select name="user_type" class="form-control">
+						<?php 
+							$selected ='';
+							while($row_user = mysqli_fetch_assoc($user_types_result)){
+								if( $row_user['user_type'] == $row['user_type']){
+									$selected ="selected=true";
+								}
+							?>
+							<option value="<?= $user ?>"  <?= $selected ?> > <?=$row['user_type'] ?></option>
+							<?php  
+							}
+						?>
+					</select>
+				</td>	
 				
 			
 
@@ -57,3 +62,11 @@ if( $select_rezult ){
         </tbody>
     </table>                     
 </div>
+
+<?php 
+var_dump($selected);
+var_dump($row['user_type']);
+var_dump($user);
+
+
+ ?>

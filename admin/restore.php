@@ -1,7 +1,7 @@
 <?php 
 include '../includes/header.php';
 
-$soft_delete_query = "UPDATE `message` SET `date_deleted`= NULL WHERE id=". $_GET['id'];
+$soft_delete_query = "UPDATE `messages` SET `date_deleted`= NULL WHERE msg_id=". $_GET['id'];
 
 $result = mysqli_query($conn, $soft_delete_query);
 

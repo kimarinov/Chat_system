@@ -1,5 +1,5 @@
 <?php
-	include 'includes/header.php';
+	include '../includes/header.php';
 	session_start();
 	function check_input($data) {
 		$data = trim($data);
@@ -29,7 +29,7 @@
 		
 		
 		$_SESSION['msg'] = "Sign up successful. You may login now!"; 
-		header('location: index.php');
+		header('location: ../index.php');
 		}
 	}
 

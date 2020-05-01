@@ -1,6 +1,6 @@
 
 <?php 
-include 'includes/header.php';
+include '../includes/header.php';
 ?>
 
 
@@ -15,7 +15,7 @@ include 'includes/header.php';
 		<div style="height: 10px;"></div>		
 		Password: <input type="password" name="password" class="form-control" required> 
 		<div style="height: 10px;"></div>
-		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Sign Up</button> <a href="index.php"> Back to Login</a>
+		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Sign Up</button> <a href="../index.php"> Back to Login</a>
 		</form>	
 		<div style="height: 15px;"></div>
 		<div style="color: red; font-size: 15px;">

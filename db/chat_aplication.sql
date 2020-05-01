@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2020 at 09:50 PM
+-- Generation Time: Apr 30, 2020 at 12:03 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -19,25 +19,35 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `chat`
+-- Database: `chat_aplication`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `messages`
+-- Table structure for table `message`
 --
 
-CREATE TABLE `messages` (
-  `msg_id` int(11) NOT NULL,
-  `sender_username` text NOT NULL,
-  `receiver_username` text NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `msg_content` text NOT NULL,
-  `msg_status` text NOT NULL,
-  `msg_date` timestamp NOT NULL DEFAULT current_timestamp(),
+CREATE TABLE `message` (
+  `id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `user_id` smallint(6) NOT NULL,
+  `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_deleted` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `message`
+--
+
+INSERT INTO `message` (`id`, `message`, `user_id`, `date_created`, `date_deleted`) VALUES
+(315, '&#128522', 2, '2020-04-29 17:26:24', NULL),
+(316, '&#128522', 2, '2020-04-29 17:28:16', NULL),
+(317, '&#128512', 3, '2020-04-29 17:28:33', NULL),
+(318, 'fsefse', 2, '2020-04-29 23:48:54', NULL),
+(319, '&#129409', 2, '2020-04-29 23:48:59', NULL),
+(320, 'dwdw&#128522 ', 2, '2020-04-29 23:49:06', NULL),
+(321, ':', 2, '2020-04-29 23:49:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -46,14 +56,22 @@ CREATE TABLE `messages` (
 --
 
 CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL,
+  `user_id` smallint(6) NOT NULL,
   `user_first_name` text NOT NULL,
   `user_name` text NOT NULL,
   `password` text NOT NULL,
-  `user_type` tinyint(4) NOT NULL,
-  `user_profile` text NOT NULL,
-  `log_in` text NOT NULL
+  `user_type` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `user_first_name`, `user_name`, `password`, `user_type`) VALUES
+(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 1),
+(2, '123', '123', '202cb962ac59075b964b07152d234b70', 2),
+(3, 'koko', 'koko', '37f525e2b6fc3cb4abd882f708ab80eb', 2),
+(4, 'test', 'test', '098f6bcd4621d373cade4e832627b4f6', 2);
 
 -- --------------------------------------------------------
 
@@ -71,18 +89,19 @@ CREATE TABLE `user_types` (
 --
 
 INSERT INTO `user_types` (`user_id`, `user_type`) VALUES
-(1, 'user'),
-(2, 'admin');
+(1, 'admin'),
+(2, 'user');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `messages`
+-- Indexes for table `message`
 --
-ALTER TABLE `messages`
-  ADD PRIMARY KEY (`msg_id`);
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `users`
@@ -101,22 +120,22 @@ ALTER TABLE `user_types`
 --
 
 --
--- AUTO_INCREMENT for table `messages`
+-- AUTO_INCREMENT for table `message`
 --
-ALTER TABLE `messages`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `message`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=322;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_types`
 --
 ALTER TABLE `user_types`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

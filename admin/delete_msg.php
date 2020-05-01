@@ -1,7 +1,7 @@
 <?php 
 include '../includes/header.php';
 
-$soft_delete_query = "DELETE FROM`message`  WHERE id=". $_GET['id'];
+$soft_delete_query = "DELETE FROM`messages`  WHERE msg_id=". $_GET['id'];
 
 $result = mysqli_query($conn, $soft_delete_query);
 
