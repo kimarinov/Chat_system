@@ -3,12 +3,7 @@
 include '../includes/header.php';
 include '../includes/navbar.php';
 include '../includes/replace_function.php';
-
-    if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
-
+session_start();
 if(isset($_SESSION['user_name'])){
     $curent_user_name = $_SESSION['user_name'];
     echo 'Welcome '.$_SESSION['user_name'];
@@ -68,8 +63,11 @@ if(isset($_SESSION['user_name'])){
 <?php 
 if(isset($_POST['message'])){
     $message = $_POST['message'];
-    $message = replace_to_emoji($message);
+    $message =replace_to_emoji($message);
     $insert_messge = "INSERT INTO `messages` (`msg_content`, `user_id`) VALUES ('$message', '$user_id')";
     $insurt_rezult = mysqli_query($conn, $insert_messge);
     header("Refresh:0");
-}?>
+}
+
+
+?>

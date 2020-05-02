@@ -12,7 +12,7 @@ if( $select_rezult ){
 	$row = mysqli_fetch_assoc($select_rezult);
 }
 
-$read_user_types = "SELECT * FROM `user_types`";
+$read_user_types = "SELECT user_type as USER_TYPE FROM `user_types`";
 $user_types_result = mysqli_query($conn, $read_user_types);
 ?>
 
@@ -35,7 +35,8 @@ $user_types_result = mysqli_query($conn, $read_user_types);
 		<?php
 			
 			?>
-			<tr>
+			<form action="" method="post" >
+				<tr>
 				<td><input type="text" name="name" value="<?= $row['user_first_name'] ?>"></td>
 				<td><input type="text" name="user_name" value="<?= $row['user_name'] ?>"></td>
 				<td><input type="text" name="password" value="<?= $row['password'] ?>"></td>
@@ -43,18 +44,22 @@ $user_types_result = mysqli_query($conn, $read_user_types);
 					<select name="user_type" class="form-control">
 						<?php 
 							$selected ='';
+							$count = 0;
 							while($row_user = mysqli_fetch_assoc($user_types_result)){
-								if( $row_user['user_type'] == $row['user_type']){
+								if( $row_user['t.user_type'] == $row['USER_TYPE']){
 									$selected ="selected=true";
+									echo "asdasdas";
+									
 								}
 							?>
-							<option value="<?= $user ?>"  <?= $selected ?> > <?=$row['user_type'] ?></option>
+							<option value=""  <?= $selected ?> > <?=$row_user['USER_TYPE']; ?></option>
 							<?php  
 							}
 						?>
 					</select>
 				</td>	
-				
+				<input type="submit" name="submit" value="save" class="btn btn-success">
+			</form>
 			
 
 			</tr>
@@ -66,7 +71,8 @@ $user_types_result = mysqli_query($conn, $read_user_types);
 <?php 
 var_dump($selected);
 var_dump($row['user_type']);
-var_dump($user);
+//var_dump($_POST['user_type']);
+echo ($count);
 
 
  ?>
