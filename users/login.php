@@ -1,6 +1,9 @@
 <?php 
 include '../includes/header.php';
-session_start();
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    }
 
 function check_input($data) {
     $data = trim($data);
@@ -51,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_type']=$row['user_type'];         
                 ?>
                 <script>
-                    window.alert('Login Success, Welcome User!');
+                    window.alert('Login Success, Welcome <?php echo $_SESSION['user_name'] ?> !');
                     window.location.href='chat_room.php';
                 </script>
                 <?php

@@ -21,7 +21,10 @@ include '../includes/header.php';
 		<div style="color: red; font-size: 15px;">
 			<center>
 			<?php
-				session_start();
+				if(!isset($_SESSION)) 
+				{ 
+					session_start(); 
+				}
 
 				if(isset($_SESSION['sign_msg'])){
 					echo $_SESSION['sign_msg'];
