@@ -6,7 +6,7 @@ include '../includes/navbar_admin.php';
 	
  <div class="container">
 	<div id="signup_form" class="well">
-		<h2><center><span class="glyphicon glyphicon-user"></span> Sign Up</center></h2>
+		<h2><center><span class="glyphicon glyphicon-user"></span>Create user</center></h2>
 		<hr>
 		<form method="POST" action="registration.php">
 		Name: <input type="text" name="name" class="form-control" required>

@@ -15,7 +15,7 @@ if(isset($_SESSION['user_name'])){
 
 <div class="col-lg-8">
    
-    <div>
+    <div class="container">
         <div class="panel panel-default" style="height: 400px;">
            
             
