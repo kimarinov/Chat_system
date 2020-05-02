@@ -9,15 +9,12 @@ if(isset($_SESSION['user_name'])){
     echo '<a href="logout.php"> Log out</a><br>';
 }
  $user_id = $_SESSION['user_id'];
- var_dump($user_id);
- var_dump($_SESSION['user_type'])
-
 
 ?>
 
 <div class="col-lg-8">
    
-    <div>
+    <div class="container">
         <div class="panel panel-default" style="height: 400px;">
            
             
