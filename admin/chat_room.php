@@ -8,6 +8,11 @@ include '../includes/replace_function.php';
     <div class="container">
         <div class="panel panel-default" style="height: 400px;">         
              <div id="chat_area" style="margin-left:10px; max-height:400px; overflow-y:scroll;   display: flex;flex-direction: column-reverse;">
+        <div class="panel panel-default" style="height: 400px;">
+           
+            
+             <div id="chat_area" style="margin-left:10px; max-height:400px; overflow-y:scroll;   display: flex;
+  flex-direction: column-reverse;">
                 <?php 
                 $read_query = "SELECT m.msg_content, u.user_name, u.user_id, m.msg_id, m.date_deleted  FROM messages  m JOIN users u ON m.user_id = u.user_id  ORDER BY m.msg_id DESC";
                 $read_result = mysqli_query($conn,$read_query);
