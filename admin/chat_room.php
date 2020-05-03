@@ -2,11 +2,6 @@
 include '../includes/header.php';
 include '../includes/navbar_admin.php';
 include '../includes/replace_function.php';
-include '../includes/header_admin.php';
-if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
 
 ?>
 
@@ -16,7 +11,7 @@ if(!isset($_SESSION))
         <div class="panel panel-default" style="height: 400px;">
            
             
-            <div id="chat_area" style="margin-left:10px; max-height:400px; overflow-y:scroll;   display: flex;
+             <div id="chat_area" style="margin-left:10px; max-height:400px; overflow-y:scroll;   display: flex;
   flex-direction: column-reverse;">
                 <?php 
                 $read_query = "SELECT m.msg_content, u.user_name, u.user_id, m.msg_id, m.date_deleted  FROM messages  m JOIN users u ON m.user_id = u.user_id  ORDER BY m.msg_id DESC";

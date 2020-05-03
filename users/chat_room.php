@@ -3,10 +3,6 @@
 include '../includes/header.php';
 include '../includes/navbar.php';
 include '../includes/replace_function.php';
-if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
 
 ?>
 
