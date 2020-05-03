@@ -3,13 +3,10 @@
 include '../includes/header.php';
 include '../includes/navbar.php';
 include '../includes/replace_function.php';
-session_start();
-if(isset($_SESSION['user_name'])){
-    $curent_user_name = $_SESSION['user_name'];
-    echo 'Welcome '.$_SESSION['user_name'];
-    echo '<a href="logout.php"> Log out</a><br>';
-}
- $user_id = $_SESSION['user_id'];
+if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
 ?>
 
