@@ -2,9 +2,6 @@
 include '../includes/header.php';
 include '../includes/navbar_admin.php';
 ?>
-
-
-
 		<div class="container">
 		    <div class="panel panel-default" style="height:50px;">
 				<span style="font-size:18px; margin-left:10px; position:relative; top:13px;"><strong><span class="glyphicon glyphicon-user"></span> Users List</strong></span>

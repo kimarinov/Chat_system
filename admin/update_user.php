@@ -5,7 +5,6 @@ include '../includes/navbar_admin.php';
 
 $id = $_GET['id'];
 
-
 $select_query = "SELECT u.user_first_name,u.user_name,u.password,t.user_type FROM `users` u JOIN user_types t ON u.user_type=t.user_id WHERE u.user_id=".$id;
 $select_rezult = mysqli_query($conn, $select_query);
 
@@ -14,7 +13,6 @@ if( $select_rezult ){
 }
 
 ?>
-
 
 <div class="container">
     <div class="panel panel-default" style="height:50px;">
@@ -26,7 +24,6 @@ if( $select_rezult ){
                 <th>Name</th>
 				<th>Username</th>
 				<th>Password</th>
-			
 			</tr>
 		</thead>
 		<tbody>
@@ -46,4 +43,3 @@ if( $select_rezult ){
 	<a class="btn btn-default" href="users.php" role="button"><span class="glyphicon glyphicon-remove"></span>Cancel</a>
 		</form>                    
 </div>
-

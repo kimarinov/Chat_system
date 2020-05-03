@@ -1,5 +1,5 @@
 <?php 
-include '../includes/header_admin.php';
+include '../includes/header.php';
 include '../includes/navbar_admin.php';
 ?>
 
@@ -20,8 +20,7 @@ include '../includes/navbar_admin.php';
 		</form>	
 		<center>
 			<?php
-				session_start();
-
+				
 				if(isset($_SESSION['sign_msg'])){
 					echo $_SESSION['sign_msg'];
 					unset($_SESSION['sign_msg']);

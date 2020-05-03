@@ -1,9 +1,6 @@
-
 <?php 
 include '../includes/header.php';
 ?>
-
-
 <div class="container">
 	<div id="signup_form" class="well">
 		<h2><center><span class="glyphicon glyphicon-user"></span> Sign Up</center></h2>

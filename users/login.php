@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         else{
             $row=mysqli_fetch_array($check_conn);
             if ($row['user_type'] == 1){
+                $_SESSION['user_name'] = $username;   
                 $_SESSION['user_type']=$row['user_type'];
                 $_SESSION['user_id'] = $row['user_id'];
               
